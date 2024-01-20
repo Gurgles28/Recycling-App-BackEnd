@@ -7,10 +7,12 @@ import com.example.RegisterLogin.Entity.User;
 import com.example.RegisterLogin.Repo.UserRepo;
 import com.example.RegisterLogin.Response.LoginResponse;
 import com.example.RegisterLogin.Service.UserService;
+import com.mysql.cj.log.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,19 +26,28 @@ public class UserIMPL implements UserService {
     public String addUser(UserDTO userDTO) {
         User user = new User(
                 userDTO.getUserID(),
+                userDTO.getAddress(),
+                userDTO.getEmail(),
                 userDTO.getUserFirstName(),
                 userDTO.getUserLastName(),
-                userDTO.getEmail(),
                 this.passwordEncoder.encode(userDTO.getPassword()),
-                userDTO.getAddress()
+                userDTO.getRole(),
+                userDTO.getPoints(),
+                userDTO.getPlasticContrib(),
+                userDTO.getAluminumContrib(),
+                userDTO.getMetalContrib(),
+                userDTO.getGlassContrib(),
+                userDTO.getPaperCardboardContrib(),
+                userDTO.getElectronicContrib()
         );
         userRepo.save(user);
         return user.getEmail();
     }
 
     UserDTO userDTO;
+
     @Override
-    public LoginResponse  loginUser(LoginDTO loginDTO) {
+    public LoginResponse loginUser(LoginDTO loginDTO) {
         String msg = "";
         User user1 = userRepo.findByEmail(loginDTO.getEmail());
         if (user1 != null) {
@@ -53,9 +64,25 @@ public class UserIMPL implements UserService {
             } else {
                 return new LoginResponse("password Not Match", false);
             }
-        }else {
+        } else {
             return new LoginResponse("Email not exits", false);
         }
     }
 
+    @Override
+    public List<User> getAllUsers() {
+        return userRepo.findAll();
+    }
+
+    @Override
+    public void updatePointsByEmail(String email, Optional<Integer> newPoints) {
+        User user = userRepo.findByEmail(email);
+
+        if (user != null && newPoints.isPresent()) {
+            int currentPoints = user.getPoints();
+            int totalPoints = currentPoints + newPoints.get();
+            user.setPoints(totalPoints);
+            userRepo.save(user);
+        }
+    }
 }

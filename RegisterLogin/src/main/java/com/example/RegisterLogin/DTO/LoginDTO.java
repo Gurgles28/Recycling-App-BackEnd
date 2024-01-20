@@ -6,7 +6,7 @@ public class LoginDTO {
 
     public LoginDTO() {
     }
-    public LoginDTO(String email, String password) {
+    public LoginDTO(String email, String password, String role) {
         this.email = email;
         this.password = password;
     }
