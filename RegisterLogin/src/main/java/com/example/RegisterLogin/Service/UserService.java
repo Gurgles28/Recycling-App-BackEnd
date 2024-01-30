@@ -4,7 +4,6 @@ import com.example.RegisterLogin.DTO.LoginDTO;
 import com.example.RegisterLogin.DTO.UserDTO;
 import com.example.RegisterLogin.Entity.User;
 import com.example.RegisterLogin.Response.LoginResponse;
-import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -26,6 +25,7 @@ public interface UserService {
 
     Map<String, BigDecimal> getAllContribMaterials(String email);
 
-
     void deductPoints(String email);
+
+    BigDecimal getUserPoints(String email);
 }

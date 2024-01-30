@@ -13,7 +13,6 @@ import com.example.RegisterLogin.Repo.UserRepo;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -60,9 +59,14 @@ public class UserController {
         return ResponseEntity.ok(contribMaterials);
     }
 
+    @GetMapping("/getPoints")
+    public BigDecimal getUserPoints(@RequestParam String email) {
+        return userService.getUserPoints(email);
+    }
+
     @PostMapping("/deductPoints")
     public ResponseEntity<String> deductPoints(@RequestParam String email) {
         userService.deductPoints(email);
-        return ResponseEntity.ok("Points deducted successfully.");
+        return ResponseEntity.ok("Points deducted");
     }
 }

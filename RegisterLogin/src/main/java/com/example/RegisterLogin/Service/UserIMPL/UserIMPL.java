@@ -144,4 +144,10 @@ public class UserIMPL implements UserService {
             userRepo.save(user);
         }
     }
+
+    @Override
+    public BigDecimal getUserPoints(String email) {
+        User user = userRepo.findByEmail(email);
+        return user.getPoints();
+    }
 }
