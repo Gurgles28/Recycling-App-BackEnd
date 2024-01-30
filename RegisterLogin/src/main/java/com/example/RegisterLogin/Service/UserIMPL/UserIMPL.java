@@ -7,12 +7,14 @@ import com.example.RegisterLogin.Entity.User;
 import com.example.RegisterLogin.Repo.UserRepo;
 import com.example.RegisterLogin.Response.LoginResponse;
 import com.example.RegisterLogin.Service.UserService;
-import com.mysql.cj.log.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -75,13 +77,70 @@ public class UserIMPL implements UserService {
     }
 
     @Override
-    public void updatePointsByEmail(String email, Optional<Integer> newPoints) {
+    public User getUserByEmail(String email) {
+        return userRepo.findByEmail(email);
+    }
+
+    @Override
+    public void updatePointsByEmail(String email, BigDecimal newPoints) {
+        User user = userRepo.findByEmail(email);
+        BigDecimal totalPoints = user.getPoints().add(newPoints);
+        user.setPoints(totalPoints);
+        userRepo.save(user);
+
+    }
+
+    @Override
+    public void contributeMaterial(String email, @org.jetbrains.annotations.NotNull String materialType, BigDecimal recycledAmount) {
         User user = userRepo.findByEmail(email);
 
-        if (user != null && newPoints.isPresent()) {
-            int currentPoints = user.getPoints();
-            int totalPoints = currentPoints + newPoints.get();
-            user.setPoints(totalPoints);
+        switch (materialType) {
+            case "Plastic":
+                user.setPlasticContrib(user.getPlasticContrib().add(recycledAmount));
+                break;
+            case "Aluminum":
+                user.setAluminumContrib(user.getAluminumContrib().add(recycledAmount));
+                break;
+            case "Metal":
+                user.setMetalContrib(user.getMetalContrib().add(recycledAmount));
+                break;
+            case "Glass":
+                user.setGlassContrib(user.getGlassContrib().add(recycledAmount));
+                break;
+            case "Paper & Cardboard":
+                user.setPaperCardboardContrib(user.getPaperCardboardContrib().add(recycledAmount));
+                break;
+            case "Electronic Waste":
+                user.setElectronicContrib(user.getElectronicContrib().add(recycledAmount));
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown material type: " + materialType);
+
+        }
+        userRepo.save(user);
+    }
+
+    @Override
+    public Map<String, BigDecimal> getAllContribMaterials(String email) {
+        User user = userRepo.findByEmail(email);
+
+        Map<String, BigDecimal> contribMaterials = new HashMap<>();
+        contribMaterials.put("Plastic", user.getPlasticContrib());
+        contribMaterials.put("Aluminum", user.getAluminumContrib());
+        contribMaterials.put("Metal", user.getMetalContrib());
+        contribMaterials.put("Glass", user.getGlassContrib());
+        contribMaterials.put("Paper & Cardboard", user.getPaperCardboardContrib());
+        contribMaterials.put("Electronic Waste", user.getElectronicContrib());
+
+        return contribMaterials;
+    }
+
+    @Override
+    public void deductPoints(String email) {
+        User user = userRepo.findByEmail(email);
+        if (user != null) {
+            BigDecimal currentPoints = user.getPoints();
+            user.setPoints(currentPoints.subtract(BigDecimal.valueOf(2000)));
             userRepo.save(user);
         }
     }

@@ -2,6 +2,8 @@ package com.example.RegisterLogin.Entity;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -21,26 +23,26 @@ public class User {
     @Column(name = "last_name", length = 255)
     private String last_name;
     @Column(name = "role", length = 255)
-    private String role;
+    private String role="client";
     @Column(name = "points", length = 255)
-    private int points;
+    private BigDecimal points= BigDecimal.valueOf(0);
     @Column(name = "plastic_contrib", length = 255)
-    private int plasticContrib = 0;
+    private BigDecimal plasticContrib = BigDecimal.valueOf(0);
     @Column(name = "aluminum_contrib", length = 255)
-    private int aluminumContrib = 0;
+    private BigDecimal aluminumContrib = BigDecimal.valueOf(0);
     @Column(name = "metal_contrib", length = 255)
-    private int metalContrib = 0;
+    private BigDecimal metalContrib = BigDecimal.valueOf(0);
     @Column(name = "glass_contrib", length = 255)
-    private int glassContrib = 0;
+    private BigDecimal glassContrib = BigDecimal.valueOf(0);
     @Column(name = "PaperCardboard_contrib", length = 255)
-    private int paperCardboardContrib = 0;
+    private BigDecimal paperCardboardContrib = BigDecimal.valueOf(0);
     @Column(name = "electronic_contrib", length = 255)
-    private int electronicContrib = 0;
+    private BigDecimal electronicContrib = BigDecimal.valueOf(0);
 
     public User() {
     }
 
-    public User(Long id, String address, String email, String first_name, String last_name,String password, String role, int points, int plasticContrib, int aluminumContrib, int metalContrib, int glassContrib, int paperCardboardContrib, int electronicContrib) {
+    public User(Long id, String address, String email, String first_name, String last_name,String password, String role, BigDecimal points, BigDecimal plasticContrib, BigDecimal aluminumContrib, BigDecimal metalContrib, BigDecimal glassContrib, BigDecimal paperCardboardContrib, BigDecimal electronicContrib) {
         this.id = id;
         this.address = address;
         this.email = email;
@@ -57,30 +59,21 @@ public class User {
         this.electronicContrib = electronicContrib;
     }
 
-    public Long getUserID() {
+    public Long getId() {
         return id;
     }
 
-    public void setUserID(Long userID) {
-        this.id = userID;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getUserFirstName() {
-        return first_name;
+    public String getAddress() {
+        return address;
     }
 
-    public void setUserFirstName(String userFirstName) {
-        this.first_name = userFirstName;
+    public void setAddress(String address) {
+        this.address = address;
     }
-
-    public String getUserLastName() {
-        return last_name;
-    }
-
-    public void setUserLastName(String userLastName) {
-        this.last_name = userLastName;
-    }
-
 
     public String getEmail() {
         return email;
@@ -98,12 +91,20 @@ public class User {
         this.password = password;
     }
 
-    public String getAddress() {
-        return address;
+    public String getFirst_name() {
+        return first_name;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
+    }
+
+    public String getLast_name() {
+        return last_name;
+    }
+
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
 
     public String getRole() {
@@ -114,59 +115,59 @@ public class User {
         this.role = role;
     }
 
-    public int getPoints() {
+    public BigDecimal getPoints() {
         return points;
     }
 
-    public void setPoints(int points) {
+    public void setPoints(BigDecimal points) {
         this.points = points;
     }
 
-    public int getPlasticContrib() {
+    public BigDecimal getPlasticContrib() {
         return plasticContrib;
     }
 
-    public void setPlasticContrib(int plasticContrib) {
+    public void setPlasticContrib(BigDecimal plasticContrib) {
         this.plasticContrib = plasticContrib;
     }
 
-    public int getAluminumContrib() {
+    public BigDecimal getAluminumContrib() {
         return aluminumContrib;
     }
 
-    public void setAluminumContrib(int aluminumContrib) {
+    public void setAluminumContrib(BigDecimal aluminumContrib) {
         this.aluminumContrib = aluminumContrib;
     }
 
-    public int getMetalContrib() {
+    public BigDecimal getMetalContrib() {
         return metalContrib;
     }
 
-    public void setMetalContrib(int metalContrib) {
+    public void setMetalContrib(BigDecimal metalContrib) {
         this.metalContrib = metalContrib;
     }
 
-    public int getGlassContrib() {
+    public BigDecimal getGlassContrib() {
         return glassContrib;
     }
 
-    public void setGlassContrib(int glassContrib) {
+    public void setGlassContrib(BigDecimal glassContrib) {
         this.glassContrib = glassContrib;
     }
 
-    public int getPaperCardboardContrib() {
+    public BigDecimal getPaperCardboardContrib() {
         return paperCardboardContrib;
     }
 
-    public void setPaperCardboardContrib(int paperCardboardContrib) {
+    public void setPaperCardboardContrib(BigDecimal paperCardboardContrib) {
         this.paperCardboardContrib = paperCardboardContrib;
     }
 
-    public int getElectronicContrib() {
+    public BigDecimal getElectronicContrib() {
         return electronicContrib;
     }
 
-    public void setElectronicContrib(int electronicContrib) {
+    public void setElectronicContrib(BigDecimal electronicContrib) {
         this.electronicContrib = electronicContrib;
     }
 

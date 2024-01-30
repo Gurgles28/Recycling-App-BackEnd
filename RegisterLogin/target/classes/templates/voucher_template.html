@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Recycling Rewards Voucher</title>
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .voucher-container {
+            padding: 20px;
+            border: 2px solid #000;
+            border-radius: 10px;
+            background-color: #FFFFC8; /* Light yellow background */
+        }
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .details {
+            font-size: 16px;
+        }
+        .redemption-instructions {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<div class="voucher-container">
+    <div class="title">Recycling Rewards Voucher</div>
+    <div class="details">
+        <p>Username/Unique Identification: <span th:text="${user.username}"></span></p>
+        <p>Name: <span th:text="${user.first_name}"></span> <span th:text="${user.last_name}"></span></p>
+        <p>Address: <span th:text="${user.address}"></span></p>
+        <p>Reward Points: <span th:text="${user.points}"></span></p>
+        <!-- Add other user-related details if needed -->
+        <p>Expiration Date: <span th:text="${expirationDate}"></span></p>
+        <p>Voucher Code: <span th:text="${voucherCode}"></span></p>
+    </div>
+    <div class="redemption-instructions">
+        <p>Redemption Instructions:</p>
+        <p>Please follow the instructions below to redeem your voucher:</p>
+        <!-- Add redemption instructions using Thymeleaf expressions -->
+    </div>
+</div>
+</body>
+</html>

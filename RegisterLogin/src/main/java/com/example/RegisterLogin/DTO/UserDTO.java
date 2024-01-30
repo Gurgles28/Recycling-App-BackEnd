@@ -2,6 +2,8 @@ package com.example.RegisterLogin.DTO;
 
 import jakarta.persistence.Column;
 
+import java.math.BigDecimal;
+
 public class UserDTO {
 
     private Long userID;
@@ -10,19 +12,19 @@ public class UserDTO {
     private String email;
     private String password;
     private String address;
-    private String role;
-    private int points;
-    private int plasticContrib;
-    private int aluminumContrib;
-    private int metalContrib;
-    private int glassContrib;
-    private int paperCardboardContrib;
-    private int electronicContrib;
+    private String role="client";
+    private BigDecimal points= BigDecimal.valueOf(0);
+    private BigDecimal plasticContrib= BigDecimal.valueOf(0);
+    private BigDecimal aluminumContrib=BigDecimal.valueOf(0);
+    private BigDecimal metalContrib=BigDecimal.valueOf(0);
+    private BigDecimal glassContrib=BigDecimal.valueOf(0);
+    private BigDecimal paperCardboardContrib=BigDecimal.valueOf(0);
+    private BigDecimal electronicContrib=BigDecimal.valueOf(0);
 
     public UserDTO() {
     }
 
-    public UserDTO(Long userID, String userFirstName, String userLastName, String email, String password, String address, String role, int points, int plasticContrib, int aluminumContrib, int metalContrib, int glassContrib, int paperCardboardContrib, int electronicContrib) {
+    public UserDTO(Long userID, String userFirstName, String userLastName, String email, String password, String address, String role, BigDecimal points, BigDecimal plasticContrib, BigDecimal aluminumContrib, BigDecimal metalContrib, BigDecimal glassContrib, BigDecimal paperCardboardContrib, BigDecimal electronicContrib) {
         this.userID = userID;
         this.address = address;
         this.email = email;
@@ -95,59 +97,59 @@ public class UserDTO {
         this.role = role;
     }
 
-    public int getPoints() {
+    public BigDecimal getPoints() {
         return points;
     }
 
-    public void setPoints(int points) {
+    public void setPoints(BigDecimal points) {
         this.points = points;
     }
 
-    public int getPlasticContrib() {
+    public BigDecimal getPlasticContrib() {
         return plasticContrib;
     }
 
-    public void setPlasticContrib(int plasticContrib) {
+    public void setPlasticContrib(BigDecimal plasticContrib) {
         this.plasticContrib = plasticContrib;
     }
 
-    public int getAluminumContrib() {
+    public BigDecimal getAluminumContrib() {
         return aluminumContrib;
     }
 
-    public void setAluminumContrib(int aluminumContrib) {
+    public void setAluminumContrib(BigDecimal aluminumContrib) {
         this.aluminumContrib = aluminumContrib;
     }
 
-    public int getMetalContrib() {
+    public BigDecimal getMetalContrib() {
         return metalContrib;
     }
 
-    public void setMetalContrib(int metalContrib) {
+    public void setMetalContrib(BigDecimal metalContrib) {
         this.metalContrib = metalContrib;
     }
 
-    public int getGlassContrib() {
+    public BigDecimal getGlassContrib() {
         return glassContrib;
     }
 
-    public void setGlassContrib(int glassContrib) {
+    public void setGlassContrib(BigDecimal glassContrib) {
         this.glassContrib = glassContrib;
     }
 
-    public int getPaperCardboardContrib() {
+    public BigDecimal getPaperCardboardContrib() {
         return paperCardboardContrib;
     }
 
-    public void setPaperCardboardContrib(int paperCardboardContrib) {
+    public void setPaperCardboardContrib(BigDecimal paperCardboardContrib) {
         this.paperCardboardContrib = paperCardboardContrib;
     }
 
-    public int getElectronicContrib() {
+    public BigDecimal getElectronicContrib() {
         return electronicContrib;
     }
 
-    public void setElectronicContrib(int electronicContrib) {
+    public void setElectronicContrib(BigDecimal electronicContrib) {
         this.electronicContrib = electronicContrib;
     }
 

@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.RegisterLogin.Repo.UserRepo;
+
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -29,8 +32,7 @@ public class UserController {
     }
 
     @PostMapping(path = "/login")
-    public ResponseEntity<?> loginUser(@RequestBody LoginDTO loginDTO)
-    {
+    public ResponseEntity<?> loginUser(@RequestBody LoginDTO loginDTO) {
         LoginResponse loginResponse = userService.loginUser(loginDTO);
         return ResponseEntity.ok(loginResponse);
     }
@@ -41,14 +43,26 @@ public class UserController {
     }
 
     @PostMapping("/updatePoints")
-    public ResponseEntity<String> updatePointsByEmail(@RequestParam String email,@RequestParam Optional<Integer> newPoints) {
+    public ResponseEntity<String> updatePointsByEmail(@RequestParam String email, @RequestParam BigDecimal newPoints) {
         userService.updatePointsByEmail(email, newPoints);
         return ResponseEntity.ok("User points updated successfully");
     }
 
     @PostMapping("/updateContribPoints")
-    public ResponseEntity<String> updateContribPointsByEmail(@RequestParam String email,@RequestParam Optional<Integer> newContribPoints) {
-        userService.updatePointsByEmail(email, newContribPoints);
+    public ResponseEntity<String> updateContribPointsByEmail(@RequestParam String email, @RequestParam String materialType, @RequestParam BigDecimal recycledAmount) {
+        userService.contributeMaterial(email, materialType, recycledAmount);
         return ResponseEntity.ok("User points updated successfully");
+    }
+
+    @GetMapping("/getContribMaterials")
+    public ResponseEntity<Map<String, BigDecimal>> getContribMaterialsByEmail(@RequestParam String email) {
+        Map<String, BigDecimal> contribMaterials = userService.getAllContribMaterials(email);
+        return ResponseEntity.ok(contribMaterials);
+    }
+
+    @PostMapping("/deductPoints")
+    public ResponseEntity<String> deductPoints(@RequestParam String email) {
+        userService.deductPoints(email);
+        return ResponseEntity.ok("Points deducted successfully.");
     }
 }

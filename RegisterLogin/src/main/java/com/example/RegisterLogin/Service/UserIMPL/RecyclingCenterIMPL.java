@@ -16,7 +16,7 @@ public class RecyclingCenterIMPL implements RecyclingCenterService {
     private RecyclingCenterRepo recyclingCenterRepo;
 
     @Override
-    public String addCenter(RecyclingCenterDTO recyclingCenterDTO) {
+    public RecyclingCenter addCenter(RecyclingCenterDTO recyclingCenterDTO) {
         RecyclingCenter recyclingCenter = new RecyclingCenter(
                 recyclingCenterDTO.getId(),
                 recyclingCenterDTO.getCounty(),
@@ -26,8 +26,8 @@ public class RecyclingCenterIMPL implements RecyclingCenterService {
                 recyclingCenterDTO.getName(),
                 recyclingCenterDTO.getHours()
         );
-        recyclingCenterRepo.save(recyclingCenter);
-        return recyclingCenter.getName();
+        RecyclingCenter savedCenter = recyclingCenterRepo.save(recyclingCenter);
+        return savedCenter;
     }
 
     @Override

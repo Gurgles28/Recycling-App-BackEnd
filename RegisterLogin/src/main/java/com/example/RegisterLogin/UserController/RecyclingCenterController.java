@@ -21,8 +21,7 @@ public class RecyclingCenterController {
         return recyclingCenterService.getAllCenters();}
 
     @PostMapping(path = "/saveCenter")
-    public String saveCenter(@RequestBody RecyclingCenterDTO recyclingCenterDTO) {
-        String id = recyclingCenterService.addCenter(recyclingCenterDTO);
-        return id;
+    public RecyclingCenter saveCenter(@RequestBody RecyclingCenterDTO recyclingCenterDTO) {
+        return recyclingCenterService.addCenter(recyclingCenterDTO);
     }
 }
