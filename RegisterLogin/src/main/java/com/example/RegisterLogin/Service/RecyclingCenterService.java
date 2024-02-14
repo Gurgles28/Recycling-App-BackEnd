@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface RecyclingCenterService {
 
-
     RecyclingCenter addCenter(RecyclingCenterDTO recyclingCenterDTO);
 
     List<RecyclingCenter> getAllCenters();

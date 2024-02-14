@@ -1,6 +1,7 @@
 package com.example.RegisterLogin.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 
 import java.math.BigDecimal;
 
@@ -15,6 +16,7 @@ public class User {
     @Column(name = "address", length = 255)
     private String address;
     @Column(name = "email", length = 255)
+    @Email(message = "Invalid email address")
     private String email;
     @Column(name = "password", length = 255)
     private String password;
@@ -182,7 +184,12 @@ public class User {
                 ", address='" + address + '\'' +
                 ", role='" + role + '\'' +
                 ", points='" + points + '\'' +
-
+                ", plasticContrib='" + plasticContrib + '\'' +
+                ", aluminumContrib='" + aluminumContrib + '\'' +
+                ", metalContrib='" + metalContrib + '\'' +
+                ", glassContrib='" + glassContrib + '\'' +
+                ", paperCardboardContrib='" + paperCardboardContrib + '\'' +
+                ", electronicContrib='" + electronicContrib + '\'' +
                 '}';
     }
 }

@@ -19,6 +19,4 @@ public class LoginResponse {
         this.message = message;
         this.status = status;
     }
-
-
 }

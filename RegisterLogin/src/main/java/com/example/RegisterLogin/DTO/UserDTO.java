@@ -1,16 +1,23 @@
 package com.example.RegisterLogin.DTO;
 
 import jakarta.persistence.Column;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 import java.math.BigDecimal;
 
 public class UserDTO {
 
     private Long userID;
+    @NotBlank(message = "First name cannot be blank")
     private String userFirstName;
+    @NotBlank(message = "Last name cannot be blank")
     private String userLastName;
+    @Email(message = "Invalid email address")
     private String email;
+    @NotBlank(message = "Password cannot be blank")
     private String password;
+    @NotBlank(message = "Address cannot be blank")
     private String address;
     private String role="client";
     private BigDecimal points= BigDecimal.valueOf(0);
